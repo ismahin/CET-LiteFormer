@@ -1,0 +1,24 @@
+{
+  "device": "cuda",
+  "latency_batch_size": 1,
+  "latency_warmup": 100,
+  "latency_repeats": 1000,
+  "early_exit_disabled": {
+    "batch_size": 1,
+    "avg_latency_ms": 5.341395600000396,
+    "throughput_flows_per_sec": 187.21698875850458,
+    "early_exit_enabled": false,
+    "exit_used_counts": {
+      "-1": 1000
+    }
+  },
+  "early_exit_enabled": {
+    "batch_size": 1,
+    "avg_latency_ms": 6.384260699967854,
+    "throughput_flows_per_sec": 156.63520758245903,
+    "early_exit_enabled": true,
+    "exit_used_counts": {
+      "2": 1000
+    }
+  }
+}

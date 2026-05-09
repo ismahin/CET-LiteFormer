@@ -1,0 +1,13 @@
+{
+  "AUDIO-STREAMING": 0,
+  "Audio-Streaming": 1,
+  "Browsing": 2,
+  "Chat": 3,
+  "Email": 4,
+  "File-Transfer": 5,
+  "File-transfer": 6,
+  "P2P": 7,
+  "VOIP": 8,
+  "Video-Streaming": 9,
+  "Video-streaming": 10
+}

@@ -1,0 +1,9 @@
+{
+  "experiment": "CIC-Darknet2020_CETLiteFormer_LastLabel",
+  "best_epoch": 100,
+  "best_val_macro_f1": 0.47187869625611767,
+  "best_model_path": "outputs\\CIC-Darknet2020_CETLiteFormer_LastLabel\\best_model.pt",
+  "last_model_path": "outputs\\CIC-Darknet2020_CETLiteFormer_LastLabel\\last_model.pt",
+  "num_features": 64,
+  "num_classes": 11
+}

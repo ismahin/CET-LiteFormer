@@ -1,0 +1,9 @@
+{
+  "experiment": "iscxvpn2016_a2_15s_vpn_cet_liteformer",
+  "best_epoch": 92,
+  "best_val_macro_f1": 0.77095316892911,
+  "best_model_path": "outputs\\iscxvpn2016_a2_15s_vpn_cet_liteformer\\best_model.pt",
+  "last_model_path": "outputs\\iscxvpn2016_a2_15s_vpn_cet_liteformer\\last_model.pt",
+  "num_features": 23,
+  "num_classes": 7
+}

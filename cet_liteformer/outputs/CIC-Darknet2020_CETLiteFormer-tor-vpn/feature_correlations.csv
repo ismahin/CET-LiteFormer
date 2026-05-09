@@ -1,0 +1,65 @@
+feature_name,abs_corr,selected
+RST Flag Count,0.93969023,True
+Fwd PSH Flags,0.83271253,True
+Bwd Packet Length Min,0.69638854,True
+SYN Flag Count,0.6159998,True
+Bwd Packet/Bulk Avg,0.6044723,True
+Subflow Fwd Packets,0.6003149,True
+Bwd Bulk Rate Avg,0.5950196,True
+Protocol,0.5583515,True
+FIN Flag Count,0.5489144,True
+Fwd Seg Size Min,0.51499194,True
+Bwd Packet Length Std,0.49593577,True
+Bwd IAT Std,0.4935397,True
+Packet Length Min,0.48755914,True
+Down/Up Ratio,0.48462117,True
+Fwd Packet Length Min,0.4830948,True
+PSH Flag Count,0.4685472,True
+Fwd Packet Length Std,0.45874792,True
+Idle Max,0.45541987,True
+FWD Init Win Bytes,0.4362854,True
+Bwd Init Win Bytes,0.43354824,True
+Subflow Bwd Bytes,0.42458287,True
+Bwd Segment Size Avg,0.4166545,True
+Bwd Packet Length Mean,0.4166545,True
+Idle Mean,0.4118376,True
+Idle Min,0.4063917,True
+ACK Flag Count,0.40609217,True
+Bwd Packet Length Max,0.3838194,True
+Total Length of Bwd Packet,0.37570685,True
+Bwd IAT Min,0.37486705,True
+Bwd IAT Mean,0.36382475,True
+Bwd IAT Max,0.36091623,True
+Bwd IAT Total,0.35791153,True
+Fwd IAT Std,0.35154694,True
+Flow IAT Std,0.33530796,True
+Fwd Header Length,0.3338721,True
+Idle Std,0.32340643,True
+Fwd Act Data Pkts,0.31500858,True
+Total Fwd Packet,0.28684258,True
+Flow Bytes/s,0.28002748,True
+Packet Length Std,0.27826694,True
+Packet Length Variance,0.27826694,True
+Dst Port,0.2738313,True
+Bwd Header Length,0.26269904,True
+Total Bwd packets,0.25393286,True
+Flow IAT Min,0.24752825,True
+Average Packet Size,0.23530741,True
+Packet Length Mean,0.22197217,True
+Packet Length Max,0.19764939,True
+Fwd IAT Max,0.18640389,True
+Bwd Packets/s,0.18075146,True
+Subflow Fwd Bytes,0.17788282,True
+Fwd IAT Mean,0.17607632,True
+Fwd IAT Total,0.17278798,True
+Fwd IAT Min,0.17206678,True
+Fwd Segment Size Avg,0.1558196,True
+Fwd Packet Length Mean,0.1558196,True
+Flow IAT Max,0.1240259,True
+Fwd Packet Length Max,0.11711164,True
+Total Length of Fwd Packet,0.11517476,True
+Fwd Packets/s,0.111080706,True
+Flow Duration,0.10783486,True
+Flow Packets/s,0.10697199,True
+Flow IAT Mean,0.09759265,True
+Src Port,0.07536893,True

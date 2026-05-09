@@ -1,0 +1,25 @@
+feature_name,abs_corr,selected
+Active Min,0.66864103,True
+Active Max,0.66864103,True
+Active Mean,0.66864103,True
+Idle Mean,0.65839565,True
+Idle Max,0.65839565,True
+Idle Min,0.65839565,True
+Protocol,0.63105524,True
+Flow IAT Min,0.32792157,True
+Flow Duration,0.2759466,True
+Flow Bytes/s,0.25161806,True
+Flow IAT Mean,0.1634314,True
+Flow Packets/s,0.13817684,True
+Fwd IAT Min,0.13583036,True
+Source Port,0.10675176,True
+Bwd IAT Min,0.087098666,True
+Fwd IAT Mean,0.044689976,True
+Flow IAT Max,0.034915596,True
+Fwd IAT Max,0.033196922,True
+Flow IAT Std,0.033165988,True
+Fwd IAT Std,0.029361242,True
+Bwd IAT Max,0.014532892,True
+Bwd IAT Std,0.014360094,True
+Destination Port,0.01301474,True
+Bwd IAT Mean,0.012053193,True

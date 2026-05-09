@@ -1,0 +1,6 @@
+{
+  "Non-Tor": 0,
+  "NonVPN": 1,
+  "Tor": 2,
+  "VPN": 3
+}

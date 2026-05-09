@@ -1,0 +1,1298 @@
+{
+  "group_to_id": {
+    "duration": 0,
+    "packet_length": 1,
+    "packet_count": 2,
+    "byte_count": 3,
+    "iat": 4,
+    "flow_rate": 5,
+    "flags": 6,
+    "header": 7,
+    "active_idle": 8,
+    "protocol_port": 9,
+    "statistical": 10,
+    "other": 11
+  },
+  "features": [
+    {
+      "feature_name": "src_port",
+      "group_id": 9,
+      "group_name": "protocol_port"
+    },
+    {
+      "feature_name": "dst_port",
+      "group_id": 9,
+      "group_name": "protocol_port"
+    },
+    {
+      "feature_name": "bwd_total_payload_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "payload_bytes_min",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "payload_bytes_median",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "payload_bytes_cov",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "payload_bytes_mode",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_payload_bytes_min",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_payload_bytes_median",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_payload_bytes_skewness",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_payload_bytes_cov",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_payload_bytes_mode",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_payload_bytes_min",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_payload_bytes_variance",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_payload_bytes_median",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_payload_bytes_mode",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "max_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "min_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "median_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mode_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_min_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_std_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_median_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_cov_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_mode_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_variance_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_max_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_min_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_std_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_median_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_cov_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_mode_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "bwd_variance_header_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "fwd_segment_size_min",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "fwd_segment_size_cov",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "fwd_segment_size_mode",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "bwd_segment_size_min",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "bwd_segment_size_mode",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "segment_size_min",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "segment_size_mode",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "active_min",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "active_max",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "active_mean",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "active_std",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "active_median",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "active_skewness",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "active_cov",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "active_mode",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "active_variance",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "idle_min",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "idle_max",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "idle_mean",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "idle_std",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "idle_median",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "idle_skewness",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "idle_cov",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "idle_mode",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "idle_variance",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "avg_fwd_bytes_per_bulk",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "avg_fwd_packets_per_bulk",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "avg_fwd_bulk_rate",
+      "group_id": 5,
+      "group_name": "flow_rate"
+    },
+    {
+      "feature_name": "avg_bwd_bytes_per_bulk",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "avg_bwd_packets_bulk_rate",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "avg_bwd_bulk_rate",
+      "group_id": 5,
+      "group_name": "flow_rate"
+    },
+    {
+      "feature_name": "fwd_bulk_state_count",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "fwd_bulk_total_size",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "fwd_bulk_per_packet",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "fwd_bulk_duration",
+      "group_id": 0,
+      "group_name": "duration"
+    },
+    {
+      "feature_name": "bwd_bulk_state_count",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "bwd_bulk_total_size",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "bwd_bulk_per_packet",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_bulk_duration",
+      "group_id": 0,
+      "group_name": "duration"
+    },
+    {
+      "feature_name": "fin_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "ece_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "syn_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "cwr_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "rst_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fwd_fin_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fwd_ece_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fwd_syn_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fwd_cwr_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fwd_rst_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "bwd_fin_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "bwd_ece_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "bwd_syn_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "bwd_cwr_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "bwd_rst_flag_counts",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fin_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "ece_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "ack_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "cwr_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "rst_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fwd_fin_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fwd_ece_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fwd_cwr_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fwd_rst_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "bwd_fin_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "bwd_ece_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "bwd_syn_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "bwd_cwr_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "bwd_rst_flag_percentage_in_total",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "fwd_fin_flag_percentage_in_fwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "fwd_ece_flag_percentage_in_fwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "fwd_ack_flag_percentage_in_fwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "fwd_cwr_flag_percentage_in_fwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "fwd_rst_flag_percentage_in_fwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_fin_flag_percentage_in_bwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_ece_flag_percentage_in_bwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_syn_flag_percentage_in_bwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_ack_flag_percentage_in_bwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_cwr_flag_percentage_in_bwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_rst_flag_percentage_in_bwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "packets_IAT_mean",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "packet_IAT_std",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "packet_IAT_max",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "packet_IAT_total",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "packets_IAT_skewness",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "packets_IAT_cov",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "packets_IAT_variance",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "fwd_packets_IAT_std",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "fwd_packets_IAT_variance",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_packets_IAT_std",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_packets_IAT_skewness",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_packets_IAT_cov",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "bwd_packets_IAT_variance",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "subflow_fwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "subflow_bwd_packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "subflow_fwd_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "subflow_bwd_bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "handshake_state",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "median_packets_delta_time",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "cov_packets_delta_time",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "variance_bwd_packets_delta_time",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "std_bwd_packets_delta_time",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "skewness_bwd_packets_delta_time",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "cov_bwd_packets_delta_time",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "variance_fwd_packets_delta_time",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "std_fwd_packets_delta_time",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "skewness_fwd_packets_delta_time",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "cov_fwd_packets_delta_time",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "min_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "max_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mean_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mode_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "median_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "skewness_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "cov_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "min_bwd_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mode_bwd_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "median_bwd_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "skewness_bwd_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "min_fwd_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mode_fwd_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "median_fwd_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "skewness_fwd_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "cov_fwd_packets_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "min_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "max_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mean_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mode_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "std_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "median_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "skewness_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "cov_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "min_bwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "max_bwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mean_bwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mode_bwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "variance_bwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "std_bwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "median_bwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "skewness_bwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "cov_bwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "min_fwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "max_fwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mean_fwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mode_fwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "variance_fwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "std_fwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "median_fwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "skewness_fwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "cov_fwd_header_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "min_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "max_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mean_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mode_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "median_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "skewness_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "cov_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "min_bwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "max_bwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mean_bwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mode_bwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "median_bwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "skewness_bwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "cov_bwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "min_fwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mean_fwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "mode_fwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "median_fwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "skewness_fwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "cov_fwd_payload_bytes_delta_len",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "bin_min_entropy",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "hex_min_entropy",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "mean_per64bytes_mutual_information",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mode_per64bytes_mutual_information",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "median_per64bytes_mutual_information",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_per64bytes_mutual_information",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "std_binary_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_binary_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mode_binary_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "median_binary_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "cov_binary_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_binary_per8bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mode_binary_per8bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "median_binary_per8bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_binary_per16bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_binary_per32bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_binary_per64bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "std_hex_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_hex_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mode_hex_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "median_hex_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mean_hex_per8bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mode_hex_per8bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "median_hex_per8bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mean_hex_per16bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_hex_per16bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mode_hex_per16bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "median_hex_per16bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mean_hex_per32bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_hex_per32bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mode_hex_per32bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "median_hex_per32bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mean_hex_per64bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_hex_per64bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_utf8_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "mode_utf8_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "median_utf8_per4bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_utf8_per8bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_utf8_per16bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_utf8_per32bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "skewness_utf8_per64bytes_entropy",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "hex_2_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "hex_4_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "hex_5_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "hex_6_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "hex_7gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "hex_8_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "hex_9_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "hex_10_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "utf8_7_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "utf8_8_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "utf8_9_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "utf8_10_gram_entropy",
+      "group_id": 11,
+      "group_name": "other"
+    }
+  ]
+}

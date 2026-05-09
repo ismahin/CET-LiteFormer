@@ -1,0 +1,23 @@
+{
+  "params": 103208,
+  "model_size_mb": 0.393707275390625,
+  "flops": 23732096.0,
+  "device": "cuda",
+  "early_exit_disabled": {
+    "latency_ms_bs1": 5.600516200065613,
+    "throughput_flows_per_sec": {
+      "bs32": 3337.4481286488017,
+      "bs128": 3315.6679895372677,
+      "bs256": 3352.552934373238
+    }
+  },
+  "early_exit_enabled": {
+    "latency_ms_bs1": 6.128323600045405,
+    "throughput_flows_per_sec": {
+      "bs32": 2834.400588273515,
+      "bs128": 3264.220103129785,
+      "bs256": 3325.176433046977
+    }
+  },
+  "memory_rss_mb": 942.2890625
+}

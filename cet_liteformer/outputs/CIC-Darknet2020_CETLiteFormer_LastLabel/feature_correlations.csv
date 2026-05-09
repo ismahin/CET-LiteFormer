@@ -1,0 +1,65 @@
+feature_name,abs_corr,selected
+RST Flag Count,0.95641124,True
+Fwd PSH Flags,0.8263128,True
+Bwd Packet Length Min,0.66519994,True
+SYN Flag Count,0.637168,True
+Subflow Fwd Packets,0.6250538,True
+Bwd Packet/Bulk Avg,0.5984703,True
+Bwd Bulk Rate Avg,0.59044296,True
+Protocol,0.5523796,True
+Dst Port,0.5478494,True
+Down/Up Ratio,0.4977283,True
+Bwd IAT Std,0.4969056,True
+Bwd Packet Length Std,0.49059355,True
+FIN Flag Count,0.48363063,True
+Fwd Seg Size Min,0.46009603,True
+PSH Flag Count,0.4584502,True
+Packet Length Min,0.4524295,True
+Fwd Packet Length Std,0.44960344,True
+Fwd Packet Length Min,0.44724098,True
+Subflow Bwd Bytes,0.41251972,True
+Bwd Segment Size Avg,0.40349334,True
+Bwd Packet Length Mean,0.40349334,True
+Fwd IAT Std,0.40301406,True
+Bwd Packet Length Max,0.37734434,True
+Total Length of Bwd Packet,0.3688648,True
+Idle Max,0.36465448,True
+Bwd IAT Min,0.36130512,True
+Bwd IAT Total,0.3536251,True
+Bwd IAT Max,0.35156605,True
+Bwd IAT Mean,0.3512177,True
+Idle Min,0.34813723,True
+Idle Mean,0.34351954,True
+Fwd IAT Min,0.3360282,True
+Bwd Init Win Bytes,0.3246675,True
+Flow IAT Std,0.31790435,True
+Idle Std,0.3100656,True
+Fwd Act Data Pkts,0.30617076,True
+ACK Flag Count,0.30317536,True
+Total Fwd Packet,0.29917318,True
+Fwd IAT Mean,0.29744378,True
+FWD Init Win Bytes,0.2928651,True
+Fwd IAT Max,0.28553775,True
+Fwd Header Length,0.2771327,True
+Packet Length Std,0.27489558,True
+Packet Length Variance,0.27489555,True
+Total Bwd packets,0.27077234,True
+Fwd IAT Total,0.26287103,True
+Flow Bytes/s,0.2595632,True
+Flow IAT Min,0.24601121,True
+Bwd Header Length,0.2373423,True
+Bwd Packets/s,0.21903661,True
+Average Packet Size,0.21443875,True
+Packet Length Mean,0.20357542,True
+Packet Length Max,0.18861307,True
+Flow IAT Mean,0.18538082,True
+Flow Packets/s,0.18353342,True
+Flow IAT Max,0.17659351,True
+Fwd Packets/s,0.16238667,True
+Subflow Fwd Bytes,0.15812236,True
+Flow Duration,0.14941078,True
+Fwd Packet Length Mean,0.13778698,True
+Fwd Segment Size Avg,0.13778698,True
+Total Length of Fwd Packet,0.11250996,True
+Fwd Packet Length Max,0.10795777,True
+Src Port,0.03659765,True

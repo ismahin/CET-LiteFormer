@@ -1,0 +1,338 @@
+{
+  "group_to_id": {
+    "duration": 0,
+    "packet_length": 1,
+    "packet_count": 2,
+    "byte_count": 3,
+    "iat": 4,
+    "flow_rate": 5,
+    "flags": 6,
+    "header": 7,
+    "active_idle": 8,
+    "protocol_port": 9,
+    "statistical": 10,
+    "other": 11
+  },
+  "features": [
+    {
+      "feature_name": "Src Port",
+      "group_id": 9,
+      "group_name": "protocol_port"
+    },
+    {
+      "feature_name": "Dst Port",
+      "group_id": 9,
+      "group_name": "protocol_port"
+    },
+    {
+      "feature_name": "Protocol",
+      "group_id": 9,
+      "group_name": "protocol_port"
+    },
+    {
+      "feature_name": "Flow Duration",
+      "group_id": 0,
+      "group_name": "duration"
+    },
+    {
+      "feature_name": "Total Fwd Packet",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "Total Bwd packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "Total Length of Fwd Packet",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Total Length of Bwd Packet",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Fwd Packet Length Max",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Fwd Packet Length Min",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Fwd Packet Length Mean",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Fwd Packet Length Std",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Bwd Packet Length Max",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Bwd Packet Length Min",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Bwd Packet Length Mean",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Bwd Packet Length Std",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Flow Bytes/s",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "Flow Packets/s",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "Flow IAT Mean",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Flow IAT Std",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Flow IAT Max",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Flow IAT Min",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Fwd IAT Total",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Fwd IAT Mean",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Fwd IAT Std",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Fwd IAT Max",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Fwd IAT Min",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Bwd IAT Total",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Bwd IAT Mean",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Bwd IAT Std",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Bwd IAT Max",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Bwd IAT Min",
+      "group_id": 4,
+      "group_name": "iat"
+    },
+    {
+      "feature_name": "Fwd PSH Flags",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "Fwd Header Length",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Bwd Header Length",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Fwd Packets/s",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "Bwd Packets/s",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "Packet Length Min",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Packet Length Max",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Packet Length Mean",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Packet Length Std",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "Packet Length Variance",
+      "group_id": 1,
+      "group_name": "packet_length"
+    },
+    {
+      "feature_name": "FIN Flag Count",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "SYN Flag Count",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "RST Flag Count",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "PSH Flag Count",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "ACK Flag Count",
+      "group_id": 6,
+      "group_name": "flags"
+    },
+    {
+      "feature_name": "Down/Up Ratio",
+      "group_id": 11,
+      "group_name": "other"
+    },
+    {
+      "feature_name": "Average Packet Size",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "Fwd Segment Size Avg",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "Bwd Segment Size Avg",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "Bwd Packet/Bulk Avg",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "Bwd Bulk Rate Avg",
+      "group_id": 5,
+      "group_name": "flow_rate"
+    },
+    {
+      "feature_name": "Subflow Fwd Packets",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "Subflow Fwd Bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "Subflow Bwd Bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "FWD Init Win Bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "Bwd Init Win Bytes",
+      "group_id": 3,
+      "group_name": "byte_count"
+    },
+    {
+      "feature_name": "Fwd Act Data Pkts",
+      "group_id": 2,
+      "group_name": "packet_count"
+    },
+    {
+      "feature_name": "Fwd Seg Size Min",
+      "group_id": 10,
+      "group_name": "statistical"
+    },
+    {
+      "feature_name": "Idle Mean",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "Idle Std",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "Idle Max",
+      "group_id": 8,
+      "group_name": "active_idle"
+    },
+    {
+      "feature_name": "Idle Min",
+      "group_id": 8,
+      "group_name": "active_idle"
+    }
+  ]
+}

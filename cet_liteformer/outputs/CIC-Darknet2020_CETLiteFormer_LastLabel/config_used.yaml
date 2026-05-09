@@ -1,0 +1,55 @@
+experiment:
+  name: CIC-Darknet2020_CETLiteFormer_LastLabel
+  seed: 42
+  output_dir: outputs
+data:
+  csv_path: ..\Datasets\CIC-Darknet2020\Darknet.CSV
+  label_col: Label__dup1
+  drop_cols: []
+  test_size: 0.15
+  val_size: 0.15
+  stratify: true
+  max_rows: null
+  missing_strategy: median
+  normalize: log_iqr
+  remove_constant_features: true
+  correlation_selection:
+    enabled: true
+    method: spearman_ovr
+    top_k: 256
+    min_abs_corr: 0.0
+model:
+  name: CET-LiteFormer
+  embed_dim: 64
+  num_layers: 2
+  num_heads: 4
+  rff_dim: 32
+  sigma: 1.0
+  dropout: 0.15
+  use_cls_token: true
+  use_entropy_gate: true
+  use_correntropy_attention: true
+  use_early_exit: true
+  early_exit_threshold: 0.9
+  ffn_bottleneck_ratio: 0.5
+  gate_prior_strength: 1.0
+training:
+  epochs: 100
+  batch_size: 256
+  lr: 0.001
+  weight_decay: 0.0001
+  patience: 60
+  optimizer: adamw
+  scheduler: cosine
+  use_focal_loss: true
+  focal_gamma: 2.0
+  gate_l1_lambda: 0.0001
+  exit_loss_lambda: 0.3
+  grad_clip: 1.0
+evaluation:
+  save_confusion_matrix: true
+  save_predictions: true
+  measure_latency: true
+  latency_batch_size: 1
+  latency_warmup: 100
+  latency_repeats: 1000

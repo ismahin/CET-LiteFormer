@@ -1,0 +1,12 @@
+,AUDIO-STREAMING,Audio-Streaming,Browsing,Chat,Email,File-Transfer,File-transfer,P2P,VOIP,Video-Streaming,Video-streaming
+AUDIO-STREAMING,179,1,17,3,0,3,12,12,1,0,0
+Audio-Streaming,130,1800,173,35,73,99,35,53,16,156,405
+Browsing,625,24,5847,9,113,175,31,11,7,127,0
+Chat,61,20,18,692,350,30,25,17,439,50,42
+Email,23,17,36,92,367,27,4,11,324,10,11
+File-Transfer,117,59,329,25,49,879,34,34,27,78,34
+File-transfer,0,0,1,0,0,0,6,0,4,1,0
+P2P,66,2,32,4,44,24,108,6974,11,13,0
+VOIP,2,6,7,8,26,2,12,0,449,13,10
+Video-Streaming,269,242,184,30,35,34,22,7,6,397,197
+Video-streaming,0,2,0,1,2,0,1,0,0,6,30

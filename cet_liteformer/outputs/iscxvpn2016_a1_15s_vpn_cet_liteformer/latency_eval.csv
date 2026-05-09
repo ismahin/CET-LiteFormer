@@ -1,0 +1,3 @@
+variant,avg_latency_ms,throughput_flows_per_sec
+early_exit_disabled,5.098923000041395,196.11984726811554
+early_exit_enabled,6.381840399932116,156.69461116743642

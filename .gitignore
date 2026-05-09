@@ -1,0 +1,54 @@
+# --- Python / general ---
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# --- Virtual environments ---
+**/.venv/
+/.venv/
+venv/
+ENV/
+env/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- IDEs / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# --- Logs / temp ---
+*.log
+*.tmp
+*.temp
+
+
+# --- ML / experiment artifacts (optional) ---
+# Keep these ignored; they are usually large and reproducible.
+runs/
+tb_logs/
+lightning_logs/
+wandb/
+
+
+# --- Local overrides / secrets ---
+.env
+.env.*
+*.key
+*.pem
+**/secrets.*
+**/*token*
+
