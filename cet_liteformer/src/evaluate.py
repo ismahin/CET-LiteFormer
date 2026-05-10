@@ -212,6 +212,8 @@ def main() -> None:
         use_cls_token=bool(cfg["model"].get("use_cls_token", True)),
         use_entropy_gate=bool(cfg["model"].get("use_entropy_gate", True)),
         use_correntropy_attention=bool(cfg["model"].get("use_correntropy_attention", True)),
+        attention_type=cfg["model"].get("attention_type"),
+        learnable_sigma=bool(cfg["model"].get("learnable_sigma", False)),
         use_early_exit=bool(cfg["model"].get("use_early_exit", True)),
         early_exit_threshold=float(cfg["model"].get("early_exit_threshold", 0.90)),
         ffn_bottleneck_ratio=float(cfg["model"].get("ffn_bottleneck_ratio", 0.5)),

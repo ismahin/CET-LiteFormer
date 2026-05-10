@@ -2,14 +2,28 @@ from __future__ import annotations
 
 import argparse
 import math
-from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .attention import CorrentropyKernelLinearAttention, StandardMultiHeadSelfAttention
+from .attention import (
+    CorrentropyRBFAttention,
+    ExperimentalCorrentropyLinearAttention,
+    StandardMultiHeadSelfAttention,
+)
+
+
+def resolve_attention_type(model_cfg: Dict[str, Any]) -> str:
+    """
+    Prefer explicit model.attention_type; otherwise derive from use_correntropy_attention.
+    Valid: correntropy_rbf (default when correntropy on), standard, correntropy_linear_experimental.
+    """
+    at = model_cfg.get("attention_type")
+    if isinstance(at, str) and at.strip():
+        return at.strip().lower()
+    return "correntropy_rbf" if bool(model_cfg.get("use_correntropy_attention", True)) else "standard"
 from .layers import (
     AttentionPooling,
     BottleneckGatedFFN,
@@ -27,7 +41,8 @@ class CETLiteFormerBlock(nn.Module):
         rff_dim: int,
         sigma: float,
         dropout: float,
-        use_correntropy_attention: bool,
+        attention_type: str,
+        learnable_sigma: bool,
         ffn_bottleneck_ratio: float,
     ) -> None:
         super().__init__()
@@ -35,16 +50,26 @@ class CETLiteFormerBlock(nn.Module):
         self.norm2 = nn.LayerNorm(embed_dim)
         self.drop = nn.Dropout(dropout)
 
-        if use_correntropy_attention:
-            self.attn = CorrentropyKernelLinearAttention(
+        at = str(attention_type).strip().lower()
+        if at == "correntropy_linear_experimental":
+            self.attn = ExperimentalCorrentropyLinearAttention(
                 embed_dim=embed_dim,
                 num_heads=num_heads,
                 rff_dim=rff_dim,
                 sigma=sigma,
                 dropout=dropout,
             )
-        else:
+        elif at == "standard":
             self.attn = StandardMultiHeadSelfAttention(embed_dim=embed_dim, num_heads=num_heads, dropout=dropout)
+        else:
+            # Default: exact Gaussian RBF / correntropy (O(N^2) in tokens)
+            self.attn = CorrentropyRBFAttention(
+                embed_dim=embed_dim,
+                num_heads=num_heads,
+                sigma=sigma,
+                dropout=dropout,
+                learnable_sigma=learnable_sigma,
+            )
 
         self.ffn = BottleneckGatedFFN(embed_dim=embed_dim, bottleneck_ratio=ffn_bottleneck_ratio, dropout=dropout)
 
@@ -71,6 +96,8 @@ class CETLiteFormer(nn.Module):
         use_cls_token: bool = True,
         use_entropy_gate: bool = True,
         use_correntropy_attention: bool = True,
+        attention_type: Optional[str] = None,
+        learnable_sigma: bool = False,
         use_early_exit: bool = True,
         early_exit_threshold: float = 0.90,
         ffn_bottleneck_ratio: float = 0.5,
@@ -89,6 +116,10 @@ class CETLiteFormer(nn.Module):
         self.use_cls_token = bool(use_cls_token)
         self.use_entropy_gate = bool(use_entropy_gate)
         self.use_correntropy_attention = bool(use_correntropy_attention)
+        self.attention_type = resolve_attention_type(
+            {"attention_type": attention_type, "use_correntropy_attention": self.use_correntropy_attention}
+        )
+        self.learnable_sigma = bool(learnable_sigma)
         self.use_early_exit = bool(use_early_exit)
         self.early_exit_threshold = float(early_exit_threshold)
 
@@ -118,7 +149,8 @@ class CETLiteFormer(nn.Module):
                     rff_dim=self.rff_dim,
                     sigma=self.sigma,
                     dropout=self.dropout,
-                    use_correntropy_attention=self.use_correntropy_attention,
+                    attention_type=self.attention_type,
+                    learnable_sigma=self.learnable_sigma,
                     ffn_bottleneck_ratio=ffn_bottleneck_ratio,
                 )
                 for _ in range(self.num_layers)
@@ -225,6 +257,8 @@ def _sanity_check() -> None:
         use_cls_token=True,
         use_entropy_gate=True,
         use_correntropy_attention=True,
+        attention_type=None,
+        learnable_sigma=False,
         use_early_exit=True,
         early_exit_threshold=0.9,
         ffn_bottleneck_ratio=0.5,

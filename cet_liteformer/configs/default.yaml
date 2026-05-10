@@ -27,6 +27,8 @@ model:
   num_heads: 4
   rff_dim: 32
   sigma: 1.0
+  learnable_sigma: false
+  attention_type: "correntropy_rbf"   # correntropy_rbf | standard | correntropy_linear_experimental
   dropout: 0.15
   use_cls_token: true
   use_entropy_gate: true
