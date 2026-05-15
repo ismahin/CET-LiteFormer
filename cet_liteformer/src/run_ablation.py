@@ -18,6 +18,7 @@ from .models.cet_liteformer import CETLiteFormer
 from .training.losses import CETLiteFormerLoss, compute_class_weights_from_labels
 from .training.scheduler import build_scheduler
 from .training.trainer import train as train_loop
+from .utils.device import resolve_device
 from .utils.io import ensure_dir, load_yaml, save_json
 from .utils.logger import print_section
 from .utils.plots import (
@@ -51,12 +52,6 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--num_workers", type=int, default=0)
     ap.add_argument("--device", type=str, default="auto")
     return ap.parse_args()
-
-
-def _device(arg: str) -> torch.device:
-    if arg.lower() == "auto":
-        return torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    return torch.device(arg)
 
 
 def _prep_splits(cfg: Dict[str, Any], variant_dir: Path, seed: int) -> Dict[str, Any]:
@@ -154,7 +149,7 @@ def main() -> None:
 
     seed = int(base_cfg["experiment"]["seed"])
     set_seed(seed)
-    device = _device(args.device)
+    device = resolve_device(args.device)
 
     variant_specs = get_variant_specs(base_cfg, args.suite)
     manifest: List[Dict[str, Any]] = []
@@ -188,19 +183,20 @@ def main() -> None:
         mi_prior = torch.tensor(mi_norm, dtype=torch.float32)
 
         bs = int(cfg["training"]["batch_size"])
+        pin_memory = device.type == "cuda"
         train_loader = DataLoader(
             FlowTabularDataset(X_train, y_train),
             batch_size=bs,
             shuffle=True,
             num_workers=int(args.num_workers),
-            pin_memory=True,
+            pin_memory=pin_memory,
         )
         val_loader = DataLoader(
             FlowTabularDataset(X_val, y_val),
             batch_size=bs,
             shuffle=False,
             num_workers=int(args.num_workers),
-            pin_memory=True,
+            pin_memory=pin_memory,
         )
 
         if cfg["model"].get("name") == "MLPBaseline":

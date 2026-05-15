@@ -1,0 +1,221 @@
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "fontFamily": "Segoe UI, Helvetica Neue, Arial, sans-serif",
+    "fontSize": "15px",
+    "primaryColor": "#E8EEF7",
+    "primaryTextColor": "#1A237E",
+    "primaryBorderColor": "#3949AB",
+    "secondaryColor": "#E0F2F1",
+    "secondaryTextColor": "#004D40",
+    "secondaryBorderColor": "#00897B",
+    "tertiaryColor": "#FFF3E0",
+    "tertiaryTextColor": "#E65100",
+    "tertiaryBorderColor": "#FB8C00",
+    "lineColor": "#455A64",
+    "textColor": "#263238",
+    "mainBkg": "#FFFFFF",
+    "nodeBorder": "#37474F",
+    "clusterBkg": "#FAFAFA",
+    "clusterBorder": "#90A4AE",
+    "titleColor": "#1A237E",
+    "edgeLabelBackground": "#FFFFFF"
+  },
+  "flowchart": {
+    "htmlLabels": true,
+    "curve": "basis",
+    "padding": 28,
+    "nodeSpacing": 45,
+    "rankSpacing": 55,
+    "diagramPadding": 24,
+    "useMaxWidth": true
+  }
+}}%%
+
+flowchart TB
+
+    TITLE["<b style='font-size:20px;color:#1A237E'>CET-LiteFormer</b><br/><span style='font-size:13px;color:#546E7A'>Correntropy-Entropy Tabular Transformer for Flow-Level Traffic Classification</span>"]
+
+    subgraph LEGEND[" "]
+        direction LR
+        L1["<span style='background:#BBDEFB;padding:4px 10px;border-radius:6px'>① Data</span>"]
+        L2["<span style='background:#B2DFDB;padding:4px 10px;border-radius:6px'>② Tokens</span>"]
+        L3["<span style='background:#C8E6C9;padding:4px 10px;border-radius:6px'>③ Gate</span>"]
+        L4["<span style='background:#FFE0B2;padding:4px 10px;border-radius:6px'>④ Encoder</span>"]
+        L5["<span style='background:#E1BEE7;padding:4px 10px;border-radius:6px'>⑤ Output</span>"]
+        L6["<span style='background:#ECEFF1;padding:4px 10px;border-radius:6px;border:1px dashed #78909C'>ℒ Train</span>"]
+    end
+
+    TITLE --> LEGEND
+
+    %% ─── ① PREPROCESSING ───────────────────────────────────────────────────
+    subgraph S1["<b>① PREPROCESSING</b>  ·  train-only fit"]
+        direction TB
+        S1A(["<b>📥 Raw flow record</b><br/>F₀ features"])
+        S1B["🧹 Imputation · drop constants"]
+        S1C["📐 Log-IQR scaling"]
+        S1D["🔍 Spearman selection<br/><b>top-K = 384</b>"]
+        S1E(["<b>x̃ ∈ ℝ^F</b><br/>F ≤ 384"])
+        S1A --> S1B --> S1C --> S1D --> S1E
+    end
+
+    S1MI[("💡 <b>MI prior m_j</b><br/>normalised · frozen")]
+
+    %% ─── ② TOKENIZATION ────────────────────────────────────────────────────
+    subgraph S2["<b>② FEATURE TOKENIZATION</b>  ·  d = 128"]
+        direction TB
+        S2A["<b>Per-feature embedding</b><br/><i>e</i><sub>ij</sub> = <i>x̃</i><sub>ij</sub><b>w</b><sub>j</sub> + <b>b</b><sub>j</sub> + <b>p</b><sub>j</sub> + <b>g</b><sub>ρ(j)</sub>"]
+        S2B["📚 Token sequence<br/><b>[CLS ; e<sub>i1</sub> … e<sub>iF</sub>]</b>"]
+        S2C(["<b>Z⁽⁰⁾</b>  ∈  ℝ<sup>(F+1)×d</sup>"])
+        S2A --> S2B --> S2C
+    end
+
+    %% ─── ③ GATE ────────────────────────────────────────────────────────────
+    subgraph S3["<b>③ ENTROPY / MI FEATURE GATE</b>"]
+        direction TB
+        S3SPLIT{{"<b>⊕ split</b>"}}
+        S3CLS["➡️ <b>CLS</b><br/><i>bypass · not gated</i>"]
+        S3FEAT["📋 Feature tokens"]
+        S3GATE["<b>Gate</b><br/><i>r</i><sub>ij</sub> = <b>w</b><sub>g</sub><sup>⊤</sup><b>e</b><sub>ij</sub> + β·<i>m</i><sub>j</sub><br/><i>ê</i><sub>ij</sub> = σ(<i>r</i><sub>ij</sub>)·<b>e</b><sub>ij</sub>"]
+        S3JOIN(["<b>Z</b><sub>gate</sub><sup>(0)</sup>"])
+        S3SCORES["📊 Gate scores <i>a</i><sub>ij</sub>"]
+        S3SPLIT --> S3CLS --> S3JOIN
+        S3SPLIT --> S3FEAT --> S3GATE --> S3JOIN
+        S3GATE --> S3SCORES
+    end
+
+    %% ─── ④ ENCODER ─────────────────────────────────────────────────────────
+    subgraph S4["<b>④ CET-LiteFormer ENCODER</b>  ·  L = 4 blocks"]
+        direction TB
+        S4IN(["<b>Z⁽ℓ−1⁾</b>"])
+
+        subgraph S4BLK["<b>Encoder block ℓ</b>  (pre-norm residual)"]
+            direction TB
+            S4AIN["Z⁽ℓ−1⁾"]
+
+            subgraph S4ATT["<b>A</b> · Correntropy RBF attention"]
+                direction LR
+                S4LN1["LayerNorm"]
+                S4MHA["<b>8 heads</b><br/>κ = exp(−‖q−k‖²/2σ²)<br/>σ <i>learnable</i>"]
+                S4LN1 --> S4MHA
+            end
+
+            S4P1(("⊕"))
+            S4MID[" "]
+
+            subgraph S4FFN["<b>B</b> · Bottleneck gated FFN  (ρ=0.67)"]
+                direction LR
+                S4LN2["LayerNorm"]
+                S4FFNBOX["<b>u</b>=GELU(<b>W</b><sub>a</sub><b>h</b>)<br/><b>g</b>=σ(<b>W</b><sub>b</sub><b>h</b>)<br/><b>h′</b>=<b>W</b><sub>o</sub>(<b>u</b>⊙<b>g</b>)"]
+                S4LN2 --> S4FFNBOX
+            end
+
+            S4P2(("⊕"))
+            S4AOUT(["<b>Z⁽ℓ⁾</b>"])
+
+            S4AIN --> S4LN1
+            S4MHA --> S4P1
+            S4AIN --> S4P1
+            S4P1 --> S4MID
+            S4MID --> S4LN2
+            S4FFNBOX --> S4P2
+            S4MID --> S4P2
+            S4P2 --> S4AOUT
+        end
+
+        S4STACK["🔁 Repeat ℓ = 1 … 4"]
+        S4FIN(["<b>Z⁽⁴⁾</b>"])
+        S4IN --> S4BLK --> S4STACK --> S4FIN
+    end
+
+    %% ─── ⑤ CLASSIFICATION ──────────────────────────────────────────────────
+    subgraph S5["<b>⑤ CLASSIFICATION</b>"]
+        direction TB
+
+        subgraph S5EXIT["<i>Deep supervision · training only</i>"]
+            direction LR
+            S5E1["Exit₁"]
+            S5E2["Exit₂"]
+            S5E3["Exit₃"]
+            S5E4["Exit₄"]
+        end
+
+        S5FINAL(["<b>FinalHead</b><br/>CLS @ Z⁽⁴⁾"])
+        S5SM["σ(·) softmax"]
+        S5Y(["<b>ŷ</b> prediction"])
+
+        subgraph S5EE["<i>⚡ Early exit · latency eval · τ=0.90</i>"]
+            S5CONF{"<b>C⁽ℓ⁾</b> ≥ τ ?"}
+            S5EARLY["Exit pred."]
+            S5CONT["Next ℓ"]
+            S5CONF -->|yes| S5EARLY
+            S5CONF -->|no| S5CONT
+        end
+
+        S5FINAL --> S5SM --> S5Y
+    end
+
+    S5NOTE["<i>★ Main test accuracy: full-depth FinalHead</i><br/><i>use_early_exit = false</i>"]
+
+    subgraph SLOSS["<b>TRAINING OBJECTIVE</b>"]
+        direction LR
+        SLOSSF["ℒ<sub>focal</sub><br/>γ=1.5"]
+        SLOSSE["ℒ<sub>exit</sub><br/>λ=0.22"]
+        SLOSSG["ℒ<sub>gate</sub><br/>λ=10⁻⁴"]
+        SLOSSTOT(["<b>ℒ</b> = ℒ<sub>focal</sub> + 0.22ℒ<sub>exit</sub> + 10⁻⁴ℒ<sub>gate</sub>"])
+        SLOSSF --> SLOSSTOT
+        SLOSSE --> SLOSSTOT
+        SLOSSG --> SLOSSTOT
+    end
+
+    %% ─── MAIN FLOW ─────────────────────────────────────────────────────────
+    LEGEND --> S1
+    S1E ==>|"<b>flow tensor</b>"| S2A
+    S2C ==>|"<b>tokens</b>"| S3SPLIT
+    S3JOIN ==>|"<b>gated tokens</b>"| S4IN
+    S4FIN ==>|"<b>representations</b>"| S5FINAL
+    S4FIN --> S5EXIT
+
+    S1MI -.->|"β·m<sub>j</sub>"| S3GATE
+
+    S4BLK -.-> S5E1
+    S4STACK -.-> S5E2
+    S4STACK -.-> S5E3
+    S4FIN -.-> S5E4
+
+    S5FINAL -.-> SLOSSF
+    S5E1 -.-> SLOSSE
+    S5E2 -.-> SLOSSE
+    S5E3 -.-> SLOSSE
+    S5E4 -.-> SLOSSE
+    S3SCORES -.-> SLOSSG
+
+    S5E2 -.-> S5CONF
+    S5FINAL ~~~ S5NOTE
+
+    %% ─── SUBGRAPH STYLES (research-paper palette) ──────────────────────────
+    style S1 fill:#E3F2FD,stroke:#1565C0,stroke-width:3px,color:#0D47A1
+    style S2 fill:#E0F2F1,stroke:#00695C,stroke-width:3px,color:#004D40
+    style S3 fill:#E8F5E9,stroke:#2E7D32,stroke-width:3px,color:#1B5E20
+    style S4 fill:#FFF3E0,stroke:#EF6C00,stroke-width:3px,color:#E65100
+    style S5 fill:#F3E5F5,stroke:#7B1FA2,stroke-width:3px,color:#4A148C
+    style SLOSS fill:#ECEFF1,stroke:#546E7A,stroke-width:2px,stroke-dasharray:6,color:#37474F
+    style S4ATT fill:#FFE0B2,stroke:#F57C00,stroke-width:2px
+    style S4FFN fill:#FFCCBC,stroke:#E64A19,stroke-width:2px
+    style S4BLK fill:#FFF8E1,stroke:#FFA000,stroke-width:2px
+    style S5EE fill:#FCE4EC,stroke:#C2185B,stroke-width:2px,stroke-dasharray:5
+    style S5EXIT fill:#EDE7F6,stroke:#5E35B1,stroke-width:1px,stroke-dasharray:4
+    style LEGEND fill:#FFFFFF,stroke:#CFD8DC,stroke-width:1px
+    style TITLE fill:#1A237E,stroke:#1A237E,color:#FFFFFF
+    style S1MI fill:#FFF9C4,stroke:#F9A825,stroke-width:2px,color:#F57F17
+    style S5NOTE fill:#FFFFFF,stroke:#90A4AE,stroke-width:1px,stroke-dasharray:4,color:#546E7A
+
+    style S1E fill:#BBDEFB,stroke:#1976D2,stroke-width:2px
+    style S2C fill:#80CBC4,stroke:#00796B,stroke-width:2px
+    style S3JOIN fill:#A5D6A7,stroke:#388E3C,stroke-width:2px
+    style S4FIN fill:#FFCC80,stroke:#F57C00,stroke-width:2px
+    style S5Y fill:#CE93D8,stroke:#8E24AA,stroke-width:3px
+    style SLOSSTOT fill:#B0BEC5,stroke:#37474F,stroke-width:2px
+
+    linkStyle default stroke:#455A64,stroke-width:2px
+    linkStyle 0 stroke:#1565C0,stroke-width:3px

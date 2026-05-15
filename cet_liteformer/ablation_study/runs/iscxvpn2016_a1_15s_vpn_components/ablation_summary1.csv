@@ -1,0 +1,15 @@
+suite,variant,description,accuracy,macro_f1,weighted_f1,mcc,balanced_accuracy,roc_auc,params,model_size_mb,flops,latency_ms_per_forward,best_epoch,best_val_macro_f1
+model_components,01_mlp_baseline,MLP (2 hidden layers): no feature-sequence or attention.,0.497867804,0.404747758,0.394373197,0.059203266,0.516299179,0.583238984,11714,0.044685364,23552,0.6462393,64,0.454808643
+model_components,02_standard_transformer,"Standard Transformer: same tokenizer + multi-head self-attention + plain FFN; no correntropy, no entropy gate.",0.800170149,0.799147959,0.799724102,0.633793116,0.79839118,0.891321813,811842,3.096931458,37963008,8.5045231,128,0.797755146
+model_components,03_cet_standard_attention_no_gate,CET-LiteFormer blocks with scaled-dot-product attention; entropy gate off.,0.801140075,0.801054807,0.801220014,0.636940024,0.801728817,0.894033335,451314,1.721626282,19134720,12.3477938,142,0.784162833
+model_components,04_cet_correntropy_no_gate,Add Gaussian RBF / correntropy self-attention (no entropy gate yet).,0.761549396,0.761464779,0.76166275,0.523900259,0.762199458,0.873364274,451314,1.721626282,19134720,15.4145906,129,0.767998478
+model_components,05_cet_correntropy_entropy_gate,Add entropy feature gate with MI prior on top of correntropy attention.,0.792016773,0.791838062,0.792092777,0.605147089,0.792221591,0.883761615,451444,1.722122192,19140608,15.9598,131,0.782710386
+model_components,06_cet_full_learnable_sigma,Full CET-LiteFormer stack: correntropy + entropy gate + learnable sigma (same capacity as default config).,0.805970149,0.805970051,0.805976128,0.614975656,0.807506814,0.895479817,451448,1.722137451,19140608,16.1728412,144,0.799313284
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,precision,recall,f1-score,support,,,,,,,,,,
+Non-VPN,0.772324472,0.842379182,0.805832148,1345,,,,,,,,,,
+VPN,0.842613215,0.772634445,0.806107955,1469,,,,,,,,,,
+accuracy,0.805970149,0.805970149,0.805970149,0.805970149,,,,,,,,,,
+macro avg,0.807468843,0.807506814,0.805970051,2814,,,,,,,,,,
+weighted avg,0.809017493,0.805970149,0.805976128,2814,,,,,,,,,,

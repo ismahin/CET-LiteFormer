@@ -1,0 +1,14 @@
+suite,variant,description,accuracy,macro_f1,weighted_f1,mcc,balanced_accuracy,roc_auc,params,model_size_mb,flops,latency_ms_per_forward,best_epoch,best_val_macro_f1
+model_components,01_mlp_baseline,MLP (2 hidden layers): no feature-sequence or attention.,0.186064925,0.165215762,0.078748144,0.049551172,0.507776321,0.51201203,11842,0.045173645,23808,0.7027575,10,0.479848757
+model_components,02_standard_transformer,"Standard Transformer: same tokenizer + multi-head self-attention + plain FFN; no correntropy, no entropy gate.",0.991369755,0.985083749,0.991430322,0.970396341,0.992057422,0.999717029,812354,3.098884583,39544064,8.9708803,118,0.986148734
+model_components,03_cet_standard_attention_no_gate,CET-LiteFormer blocks with scaled-dot-product attention; entropy gate off.,0.990894695,0.984323864,0.990975856,0.969018524,0.993226057,0.999720941,451826,1.723579407,19928320,12.1808557,136,0.986860196
+model_components,04_cet_correntropy_no_gate,Add Gaussian RBF / correntropy self-attention (no entropy gate yet).,0.987885986,0.979289785,0.988034943,0.959287232,0.991590522,0.999494767,451826,1.723579407,19928320,15.2628136,129,0.980136325
+model_components,05_cet_correntropy_entropy_gate,Add entropy feature gate with MI prior on top of correntropy attention.,0.986698337,0.977302889,0.986874083,0.95542275,0.990509192,0.999387152,451956,1.724075317,19934464,16.1371872,147,0.977425828
+model_components,06_cet_full_learnable_sigma,Full CET-LiteFormer stack: correntropy + entropy gate + learnable sigma (same capacity as default config).,0.99239905,0.986851067,0.992449093,0.973903793,0.993406997,0.999694741,451960,1.724090576,19934464,16.705381,127,0.987106424
+,,,,,,,,,,,,,,
+,precision,recall,f1-score,support,,,,,,,,,,
+TOR,0.96222134,0.99494538,0.97830979,2176,,,,,,,,,,
+nonTOR,0.99894039,0.99186902,0.99539214,10454,,,,,,,,,,
+accuracy,0.993406997,0.993406997,0.993406997,0.991528108,,,,,,,,,,
+macro avg,0.98058087,0.9934072,0.98685107,12630,,,,,,,,,,
+weighted avg,0.99261453,0.99239905,0.99244909,12630,,,,,,,,,,

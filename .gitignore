@@ -38,7 +38,6 @@ Thumbs.db
 
 # --- ML / experiment artifacts (optional) ---
 # Keep these ignored; they are usually large and reproducible.
-runs/
 tb_logs/
 lightning_logs/
 wandb/

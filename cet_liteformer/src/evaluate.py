@@ -21,6 +21,7 @@ from .data.preprocessing import (
 )
 from .models.cet_liteformer import CETLiteFormer
 from .training.metrics import compute_classification_metrics, sklearn_classification_report_df
+from .utils.device import resolve_device
 from .utils.io import ensure_dir, load_json, load_yaml, save_json
 from .utils.logger import print_section
 from .utils.plots import plot_confusion_matrix, plot_gate_importance_topk, plot_roc_curve
@@ -34,12 +35,6 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--device", type=str, default="auto")
     ap.add_argument("--batch_size", type=int, default=512)
     return ap.parse_args()
-
-
-def _device(arg: str) -> torch.device:
-    if arg.lower() == "auto":
-        return torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    return torch.device(arg)
 
 
 def _load_df(path: Path, max_rows: Optional[int] = None) -> pd.DataFrame:
@@ -224,7 +219,7 @@ def main() -> None:
     model.load_state_dict(ckpt["model_state"], strict=True)
     model.eval()
 
-    device = _device(args.device)
+    device = resolve_device(args.device)
     model.to(device)
 
     target_names = [k for k, _ in sorted(label_mapping.items(), key=lambda kv: kv[1])]

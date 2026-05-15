@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CET-LiteFormer Architecture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Segoe UI", sans-serif;
+      background: linear-gradient(160deg, #eceff1 0%, #f4f6f9 50%, #e8eaf6 100%);
+      color: #263238;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(135deg, #1a237e, #3949ab);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.3);
+    }
+    header h1 {
+      font-family: "Source Serif 4", Georgia, serif;
+      margin: 0 0 0.3rem;
+      font-size: 1.9rem;
+    }
+    header p { margin: 0; opacity: 0.92; }
+    .toolbar {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding: 1rem;
+    }
+    .toolbar button {
+      font: 600 0.9rem inherit;
+      padding: 0.55rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #3949ab;
+      color: #fff;
+    }
+    .toolbar button.secondary {
+      background: #fff;
+      color: #3949ab;
+      border: 2px solid #3949ab;
+    }
+    main {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem;
+    }
+    .diagram-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+      overflow-x: auto;
+    }
+    .mermaid svg { max-width: 100% !important; height: auto !important; }
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #546e7a;
+      padding: 1rem;
+    }
+    @media print {
+      body { background: #fff; }
+      header, .toolbar { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CET-LiteFormer Architecture</h1>
+    <p>Rich visualization · open cet_liteformer_architecture_rich.mmd in Mermaid Live for SVG export</p>
+  </header>
+  <div class="toolbar">
+    <button type="button" onclick="window.print()">Print / Save as PDF</button>
+    <button type="button" class="secondary" onclick="window.open('https://mermaid.live')">Open Mermaid Live</button>
+  </div>
+  <main>
+    <div class="diagram-card">
+      <pre class="mermaid" id="diagram">Loading diagram…</pre>
+    </div>
+  </main>
+  <footer>figures/cet_liteformer_architecture_rich.mmd → export SVG → LaTeX \includegraphics</footer>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: false, securityLevel: "loose" });
+    const el = document.getElementById("diagram");
+    try {
+      const res = await fetch("cet_liteformer_architecture_rich.mmd");
+      el.textContent = await res.text();
+    } catch {
+      el.textContent = "Open cet_liteformer_architecture_rich.mmd in https://mermaid.live (file:// cannot fetch .mmd).";
+    }
+    await mermaid.run({ nodes: [el] });
+  </script>
+</body>
+</html>

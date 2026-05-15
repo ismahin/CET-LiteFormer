@@ -15,6 +15,7 @@ from .models.cet_liteformer import CETLiteFormer
 from .training.losses import CETLiteFormerLoss, compute_class_weights_from_labels
 from .training.scheduler import build_scheduler
 from .training.trainer import train as train_loop
+from .utils.device import resolve_device
 from .utils.io import ensure_dir, load_yaml, save_yaml
 from .utils.logger import print_section
 from .utils.plots import plot_training_curves
@@ -27,19 +28,14 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--csv_path", type=str, default=None, help="CSV/ARFF dataset path (overrides config.data.csv_path)")
     ap.add_argument("--label_col", type=str, default=None, help="Label column name (overrides config.data.label_col)")
     ap.add_argument("--experiment_name", type=str, default=None, help="Experiment name (overrides config.experiment.name)")
-    ap.add_argument("--device", type=str, default=None, help="cuda / cpu / auto")
+    ap.add_argument("--device", type=str, default="auto", help="cuda / cpu / auto (auto uses CPU if CUDA unavailable)")
     ap.add_argument("--num_workers", type=int, default=0)
     return ap.parse_args()
 
 
-def _resolve_device(arg: Optional[str]) -> torch.device:
-    if arg is None or arg == "" or arg.lower() == "auto":
-        return torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    return torch.device(arg)
-
-
 def main() -> None:
     args = parse_args()
+    device = resolve_device(args.device)
     cfg = load_yaml(args.config)
 
     if args.csv_path is not None:
@@ -117,8 +113,13 @@ def main() -> None:
     val_ds = FlowTabularDataset(X_val, y_val)
 
     bs = int(train_cfg["batch_size"])
-    train_loader = DataLoader(train_ds, batch_size=bs, shuffle=True, num_workers=int(args.num_workers), pin_memory=True)
-    val_loader = DataLoader(val_ds, batch_size=bs, shuffle=False, num_workers=int(args.num_workers), pin_memory=True)
+    pin_memory = device.type == "cuda"
+    train_loader = DataLoader(
+        train_ds, batch_size=bs, shuffle=True, num_workers=int(args.num_workers), pin_memory=pin_memory
+    )
+    val_loader = DataLoader(
+        val_ds, batch_size=bs, shuffle=False, num_workers=int(args.num_workers), pin_memory=pin_memory
+    )
 
     # model
     model = CETLiteFormer(
@@ -168,7 +169,8 @@ def main() -> None:
         warmup_epochs=int(train_cfg.get("warmup_epochs", 0)),
     )
 
-    device = _resolve_device(args.device)
+    print_section("DEVICE")
+    print(f"Using device: {device}")
     result = train_loop(
         model=model,
         loss_fn=loss_fn,

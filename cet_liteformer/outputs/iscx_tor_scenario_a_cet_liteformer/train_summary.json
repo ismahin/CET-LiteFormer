@@ -1,7 +1,7 @@
 {
   "experiment": "iscx_tor_scenario_a_cet_liteformer",
-  "best_epoch": 80,
-  "best_val_macro_f1": 0.9744786185330585,
+  "best_epoch": 140,
+  "best_val_macro_f1": 0.9865912151257747,
   "best_model_path": "outputs\\iscx_tor_scenario_a_cet_liteformer\\best_model.pt",
   "last_model_path": "outputs\\iscx_tor_scenario_a_cet_liteformer\\last_model.pt",
   "num_features": 24,

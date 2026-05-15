@@ -5,8 +5,8 @@
   "latency_repeats": 1000,
   "early_exit_disabled": {
     "batch_size": 1,
-    "avg_latency_ms": 5.839051700080745,
-    "throughput_flows_per_sec": 171.26068604362104,
+    "avg_latency_ms": 11.455548699999781,
+    "throughput_flows_per_sec": 87.29394166863601,
     "early_exit_enabled": false,
     "exit_used_counts": {
       "-1": 1000
@@ -14,8 +14,8 @@
   },
   "early_exit_enabled": {
     "batch_size": 1,
-    "avg_latency_ms": 3.628582499921322,
-    "throughput_flows_per_sec": 275.58971031296187,
+    "avg_latency_ms": 4.451312500000313,
+    "throughput_flows_per_sec": 224.6528411563847,
     "early_exit_enabled": true,
     "exit_used_counts": {
       "0": 1000

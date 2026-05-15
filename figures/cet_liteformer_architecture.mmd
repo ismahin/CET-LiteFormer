@@ -1,0 +1,199 @@
+%% CET-LiteFormer — end-to-end architecture (top-to-bottom, paper-aligned)
+%% Render: https://mermaid.live  |  Export SVG → PDF for LaTeX
+
+flowchart TB
+    %% ═══════════════════════════════════════════════════════════════════════
+    %% STAGE 1 — PREPROCESSING
+    %% ═══════════════════════════════════════════════════════════════════════
+    subgraph S1["① Preprocessing · train-only fit"]
+        direction TB
+        S1A["Raw flow vector · F₀ features"]
+        S1B["Imputation · remove constants"]
+        S1C["Log-IQR robust scaling"]
+        S1D["Spearman label correlation · keep top-K=384"]
+        S1E["Reduced input x̃ ∈ ℝ^F  (F ≤ 384)"]
+        S1A --> S1B --> S1C --> S1D --> S1E
+    end
+
+    S1MI["MI prior m_j<br/>normalised mutual information<br/>(fixed after train estimate)"]
+
+    %% ═══════════════════════════════════════════════════════════════════════
+    %% STAGE 2 — TOKENIZATION
+    %% ═══════════════════════════════════════════════════════════════════════
+    subgraph S2["② Feature tokenization · d = 128"]
+        direction TB
+        S2A["For each feature j:<br/>e_ij = x̃_ij·w_j + b_j + p_j + g_ρ(j)"]
+        S2B["Sequence: [CLS ; e_i1 … e_iF]"]
+        S2C["Z⁽⁰⁾ ∈ ℝ^(F+1)×d"]
+        S2A --> S2B --> S2C
+    end
+
+    %% ═══════════════════════════════════════════════════════════════════════
+    %% STAGE 3 — GATE (CLS bypass inside this stage)
+    %% ═══════════════════════════════════════════════════════════════════════
+    subgraph S3["③ Entropy / MI feature gate"]
+        direction TB
+        S3SPLIT{"token split"}
+        S3CLS["CLS row<br/>pass-through · not gated"]
+        S3FEAT["Feature rows e_i1…e_iF"]
+        S3GATE["Gate logits: r_ij = w_gᵀe_ij + β·m_j<br/>Gated: ê_ij = σ(r_ij) · e_ij"]
+        S3JOIN["Merge → Z_gate⁽⁰⁾ ∈ ℝ^(F+1)×d"]
+        S3SCORES["Gate scores a_ij ∈ ℝ^F<br/>(for L_gate sparsity)"]
+        S3SPLIT --> S3CLS --> S3JOIN
+        S3SPLIT --> S3FEAT --> S3GATE --> S3JOIN
+        S3GATE --> S3SCORES
+    end
+
+    %% ═══════════════════════════════════════════════════════════════════════
+    %% STAGE 4 — ENCODER STACK
+    %% ═══════════════════════════════════════════════════════════════════════
+    subgraph S4["④ CET-LiteFormer encoder · L = 4 identical blocks"]
+        direction TB
+
+        S4IN["Input to block ℓ: Z⁽ℓ−1⁾"]
+
+        subgraph S4BLK["Single encoder block ℓ"]
+            direction TB
+
+            S4A_IN["Z⁽ℓ−1⁾"]
+
+            subgraph S4ATT["A · Gaussian RBF correntropy self-attention"]
+                direction TB
+                S4LN1["LayerNorm"]
+                S4MHA["8 heads · κ(q,k)=exp(−‖q−k‖²/2σ²)<br/>σ learnable (init 1.0)"]
+                S4LN1 --> S4MHA
+            end
+
+            S4P1(("⊕"))
+            S4MID["After attention residual"]
+
+            subgraph S4FFN["B · Bottleneck gated FFN · ρ_ffn = 0.67"]
+                direction TB
+                S4LN2["LayerNorm"]
+                S4U["u = GELU(W_a h)"]
+                S4G["g = σ(W_b h)"]
+                S4OUT["h′ = W_o (u ⊙ g)"]
+                S4LN2 --> S4U --> S4OUT
+                S4LN2 --> S4G --> S4OUT
+            end
+
+            S4P2(("⊕"))
+            S4A_OUT["Z⁽ℓ⁾"]
+
+            S4A_IN --> S4LN1
+            S4MHA --> S4P1
+            S4A_IN --> S4P1
+            S4P1 --> S4MID
+            S4MID --> S4LN2
+            S4OUT --> S4P2
+            S4MID --> S4P2
+            S4P2 --> S4A_OUT
+        end
+
+        S4REP["Repeat block ℓ = 1, 2, 3, 4"]
+        S4FIN["Encoder output Z⁽⁴⁾"]
+        S4IN --> S4BLK
+        S4BLK --> S4REP --> S4FIN
+    end
+
+    %% ═══════════════════════════════════════════════════════════════════════
+    %% STAGE 5 — HEADS & OUTPUT
+    %% ═══════════════════════════════════════════════════════════════════════
+    subgraph S5["⑤ Classification & optional early exit"]
+        direction TB
+
+        S5CLS["Read CLS token h⁽ℓ⁾ from Z⁽ℓ⁾"]
+
+        subgraph S5EXIT["Auxiliary exit heads · deep supervision (training)"]
+            direction LR
+            S5E1["ExitHead₁ → z⁽¹⁾"]
+            S5E2["ExitHead₂ → z⁽²⁾"]
+            S5E3["ExitHead₃ → z⁽³⁾"]
+            S5E4["ExitHead₄ → z⁽⁴⁾"]
+        end
+
+        S5FINAL["FinalHead on CLS at Z⁽⁴⁾ → z"]
+        S5SM["softmax(z)"]
+        S5Y["Prediction ŷ"]
+
+        subgraph S5EE["Early exit path · latency benchmarks only<br/>τ = 0.90 · use_early_exit = true"]
+            direction TB
+            S5CONF{"Confidence C_i⁽ℓ⁾ = 1 − H(p)/log K ≥ τ ?"}
+            S5EARLY["Return ExitHead_ℓ logits"]
+            S5CONT["Continue to block ℓ+1"]
+            S5CONF -->|yes| S5EARLY
+            S5CONF -->|no| S5CONT
+        end
+
+        S5CLS --> S5EXIT
+        S5FINAL --> S5SM --> S5Y
+    end
+
+  subgraph SLOSS["Training objective (not inference path)"]
+        direction TB
+        SLOSSF["ℒ_focal · class-weighted · γ=1.5"]
+        SLOSSE["ℒ_exit · λ=0.22 · mean over 4 exit heads"]
+        SLOSSG["ℒ_gate · λ=10⁻⁴ · mean |a_ij|"]
+        SLOSSTOT["ℒ = ℒ_focal + 0.22·ℒ_exit + 10⁻⁴·ℒ_gate"]
+        SLOSSF --> SLOSSTOT
+        SLOSSE --> SLOSSTOT
+        SLOSSG --> SLOSSTOT
+    end
+
+    %% ═══════════════════════════════════════════════════════════════════════
+    %% MAIN PIPELINE (solid arrows)
+    %% ═══════════════════════════════════════════════════════════════════════
+    S1E --> S2A
+    S2C --> S3SPLIT
+    S3JOIN --> S4IN
+    S4FIN --> S5CLS
+    S4FIN --> S5FINAL
+
+    %% Per-layer exit taps (after each block during forward)
+    S4BLK -.->|after each ℓ| S5E1
+    S4REP -.-> S5E2
+    S4REP -.-> S5E3
+    S4FIN -.-> S5E4
+
+    %% MI prior → gate only
+    S1MI -.->|β·m_j| S3GATE
+
+    %% Loss connections (dashed)
+    S5FINAL -.-> SLOSSF
+    S5E1 -.-> SLOSSE
+    S5E2 -.-> SLOSSE
+    S5E3 -.-> SLOSSE
+    S5E4 -.-> SLOSSE
+    S3SCORES -.-> SLOSSG
+
+    %% Early exit optional from intermediate heads
+    S5E1 -.-> S5CONF
+    S5E2 -.-> S5CONF
+    S5E3 -.-> S5CONF
+    S5E4 -.-> S5CONF
+
+    %% Main accuracy path note
+    S5NOTE["Main test metrics: full depth FinalHead<br/>(use_early_exit = false in experiments)"]
+    S5FINAL ~~~ S5NOTE
+
+    %% ═══════════════════════════════════════════════════════════════════════
+    %% STYLES
+    %% ═══════════════════════════════════════════════════════════════════════
+    classDef stage fill:#f8fafc,stroke:#334155,stroke-width:2px
+    classDef pre fill:#dbeafe,stroke:#1d4ed8,color:#0f172a
+    classDef tok fill:#ccfbf1,stroke:#0f766e,color:#0f172a
+    classDef gate fill:#dcfce7,stroke:#15803d,color:#0f172a
+    classDef enc fill:#ffedd5,stroke:#c2410c,color:#0f172a
+    classDef head fill:#ede9fe,stroke:#6d28d9,color:#0f172a
+    classDef loss fill:#f1f5f9,stroke:#64748b,color:#0f172a
+    classDef mi fill:#fef9c3,stroke:#a16207,color:#0f172a
+    classDef note fill:#fff,stroke:#94a3b8,color:#475569,stroke-dasharray:5
+
+    class S1A,S1B,S1C,S1D,S1E pre
+    class S2A,S2B,S2C tok
+    class S3SPLIT,S3CLS,S3FEAT,S3GATE,S3JOIN,S3SCORES gate
+    class S4IN,S4A_IN,S4LN1,S4MHA,S4P1,S4MID,S4LN2,S4U,S4G,S4OUT,S4P2,S4A_OUT,S4BLK,S4REP,S4FIN enc
+    class S5CLS,S5E1,S5E2,S5E3,S5E4,S5FINAL,S5SM,S5Y,S5CONF,S5EARLY,S5CONT head
+    class SLOSSF,SLOSSE,SLOSSG,SLOSSTOT loss
+    class S1MI mi
+    class S5NOTE note

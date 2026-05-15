@@ -18,6 +18,7 @@ from .data.preprocessing import (
     load_imputer_state,
 )
 from .models.cet_liteformer import CETLiteFormer
+from .utils.device import resolve_device
 from .utils.io import ensure_dir, load_json, load_yaml, save_json
 from .utils.model_stats import count_parameters, estimate_flops, estimate_model_size_mb, get_memory_usage_mb
 
@@ -29,12 +30,6 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--warmup", type=int, default=None)
     ap.add_argument("--repeats", type=int, default=None)
     return ap.parse_args()
-
-
-def _device(arg: str) -> torch.device:
-    if arg.lower() == "auto":
-        return torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    return torch.device(arg)
 
 
 def _load_test_matrix(exp_dir: Path):
@@ -102,7 +97,7 @@ def main() -> None:
     warmup = int(args.warmup) if args.warmup is not None else int(cfg["evaluation"].get("latency_warmup", 100))
     repeats = int(args.repeats) if args.repeats is not None else int(cfg["evaluation"].get("latency_repeats", 1000))
 
-    device = _device(args.device)
+    device = resolve_device(args.device)
 
     X_test = _load_test_matrix(exp_dir)
     num_features = int(X_test.shape[1])
