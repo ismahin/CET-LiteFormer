@@ -92,7 +92,104 @@ cd D:\Projects\CET-LiteFormer\cet_liteformer
   --device cuda
 ```
 
-For evaluate and `benchmark_latency`, point `--experiment_dir` at `outputs\iscx_tor_scenario_a_cet_liteformer` or `outputs\iscxvpn2016_a1_15s_vpn_cet_liteformer` respectively. Bash equivalents are under `cet_liteformer/scripts/`.
+Bash equivalents for train/eval are under `cet_liteformer/scripts/`.
+
+### Evaluate (test metrics; all three benchmarks)
+
+**CIC-Darknet2020**
+
+```powershell
+cd D:\Projects\CET-LiteFormer\cet_liteformer
+.\.venv\Scripts\python.exe -m src.evaluate `
+  --experiment_dir "outputs\CIC-Darknet2020_CETLiteFormer-tor-vpn" `
+  --checkpoint "best_model.pt" `
+  --device cuda
+```
+
+**ISCX-Tor Scenario A**
+
+```powershell
+cd D:\Projects\CET-LiteFormer\cet_liteformer
+.\.venv\Scripts\python.exe -m src.evaluate `
+  --experiment_dir "outputs\iscx_tor_scenario_a_cet_liteformer" `
+  --checkpoint "best_model.pt" `
+  --device cuda
+```
+
+**ISCXVPN2016 Scenario A1**
+
+```powershell
+cd D:\Projects\CET-LiteFormer\cet_liteformer
+.\.venv\Scripts\python.exe -m src.evaluate `
+  --experiment_dir "outputs\iscxvpn2016_a1_15s_vpn_cet_liteformer" `
+  --checkpoint "best_model.pt" `
+  --device cuda
+```
+
+Optional: `--checkpoint last_model.pt`, `--device cpu`, `--batch_size 256`.
+
+### Latency benchmark (all three)
+
+**CIC-Darknet2020**
+
+```powershell
+cd D:\Projects\CET-LiteFormer\cet_liteformer
+.\.venv\Scripts\python.exe -m src.benchmark_latency `
+  --experiment_dir "outputs\CIC-Darknet2020_CETLiteFormer-tor-vpn" `
+  --device cuda
+```
+
+**ISCX-Tor Scenario A**
+
+```powershell
+cd D:\Projects\CET-LiteFormer\cet_liteformer
+.\.venv\Scripts\python.exe -m src.benchmark_latency `
+  --experiment_dir "outputs\iscx_tor_scenario_a_cet_liteformer" `
+  --device cuda
+```
+
+**ISCXVPN2016 Scenario A1**
+
+```powershell
+cd D:\Projects\CET-LiteFormer\cet_liteformer
+.\.venv\Scripts\python.exe -m src.benchmark_latency `
+  --experiment_dir "outputs\iscxvpn2016_a1_15s_vpn_cet_liteformer" `
+  --device cuda
+```
+
+## Ablation study
+
+Runs multiple model or training variants and writes summaries under `cet_liteformer/ablation_study/runs/<experiment_name>/` (when using `--ablation_root` as below). See `cet_liteformer/ablation_study/README.md` for suite details (`model_components`, `training_objectives`, `legacy`, `all`).
+
+**Example: incremental model ladder on CIC-Darknet2020**
+
+```powershell
+cd D:\Projects\CET-LiteFormer\cet_liteformer
+.\.venv\Scripts\python.exe -m src.run_ablation `
+  --config configs/default.yaml `
+  --csv_path "..\Datasets\CIC-Darknet2020\Darknet.CSV" `
+  --label_col "Label" `
+  --experiment_name "cic_darknet2020_components" `
+  --suite model_components `
+  --ablation_root "ablation_study/runs" `
+  --device cuda
+```
+
+**Example: training-objective ablations (same full CET model)**
+
+```powershell
+cd D:\Projects\CET-LiteFormer\cet_liteformer
+.\.venv\Scripts\python.exe -m src.run_ablation `
+  --config configs/default.yaml `
+  --csv_path "..\Datasets\CIC-Darknet2020\Darknet.CSV" `
+  --label_col "Label" `
+  --experiment_name "cic_darknet2020_training_obj" `
+  --suite training_objectives `
+  --ablation_root "ablation_study/runs" `
+  --device cuda
+```
+
+For faster iteration, point `--config` at a YAML copy with reduced `training.epochs` and `training.patience`.
 
 ## Configuration
 The main config is `configs/default.yaml`. Useful knobs:
