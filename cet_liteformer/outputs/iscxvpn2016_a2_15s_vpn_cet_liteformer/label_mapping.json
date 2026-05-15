@@ -1,9 +1,0 @@
-{
-  "VPN-BROWSING": 0,
-  "VPN-CHAT": 1,
-  "VPN-FT": 2,
-  "VPN-MAIL": 3,
-  "VPN-P2P": 4,
-  "VPN-STREAMING": 5,
-  "VPN-VOIP": 6
-}

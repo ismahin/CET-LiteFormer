@@ -1,9 +1,0 @@
-{
-  "experiment": "BCCC-Darknet-2025_Multi_CETLiteFormer",
-  "best_epoch": 83,
-  "best_val_macro_f1": 0.6228770579106844,
-  "best_model_path": "outputs\\BCCC-Darknet-2025_Multi_CETLiteFormer\\best_model.pt",
-  "last_model_path": "outputs\\BCCC-Darknet-2025_Multi_CETLiteFormer\\last_model.pt",
-  "num_features": 256,
-  "num_classes": 5
-}

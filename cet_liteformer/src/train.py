@@ -161,7 +161,12 @@ def main() -> None:
     if opt_name != "adamw":
         raise ValueError("Only AdamW is supported in this implementation.")
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=wd)
-    scheduler = build_scheduler(str(train_cfg.get("scheduler", "cosine")), optimizer, epochs=int(train_cfg["epochs"]))
+    scheduler = build_scheduler(
+        str(train_cfg.get("scheduler", "cosine")),
+        optimizer,
+        epochs=int(train_cfg["epochs"]),
+        warmup_epochs=int(train_cfg.get("warmup_epochs", 0)),
+    )
 
     device = _resolve_device(args.device)
     result = train_loop(

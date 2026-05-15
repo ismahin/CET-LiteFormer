@@ -17,39 +17,41 @@ data:
   correlation_selection:
     enabled: true
     method: "spearman_ovr"   # spearman_ovr (multiclass) / spearman (binary)
-    top_k: 256              # keep top-K by |corr|; set null to disable top-k
+    top_k: 384              # keep top-K by |corr|; more features often help accuracy (more compute)
     min_abs_corr: 0.0       # optional threshold after top-k
 
 model:
   name: "CET-LiteFormer"
-  embed_dim: 64
-  num_layers: 2
-  num_heads: 4
-  rff_dim: 32
+  embed_dim: 128
+  num_layers: 4
+  num_heads: 8
+  rff_dim: 64
   sigma: 1.0
-  learnable_sigma: false
+  learnable_sigma: true   # lets RBF correntropy adapt scale per training
   attention_type: "correntropy_rbf"   # correntropy_rbf | standard | correntropy_linear_experimental
-  dropout: 0.15
+  dropout: 0.12
   use_cls_token: true
   use_entropy_gate: true
   use_correntropy_attention: true
-  use_early_exit: true
+  # At inference, always use the deepest representation (better accuracy than early-exit heads).
+  use_early_exit: false
   early_exit_threshold: 0.90
-  ffn_bottleneck_ratio: 0.5
+  ffn_bottleneck_ratio: 0.67
   gate_prior_strength: 1.0
 
 training:
-  epochs: 100
+  epochs: 150
   batch_size: 256
-  lr: 0.001
-  weight_decay: 0.0001
-  patience: 60
+  lr: 0.0008
+  weight_decay: 0.00015
+  patience: 90
   optimizer: "adamw"
-  scheduler: "cosine"
+  scheduler: "cosine_warmup"
+  warmup_epochs: 12
   use_focal_loss: true
-  focal_gamma: 2.0
+  focal_gamma: 1.5        # slightly softer than 2.0; keeps signal on easier examples
   gate_l1_lambda: 0.0001
-  exit_loss_lambda: 0.3
+  exit_loss_lambda: 0.22  # auxiliary heads for training depth; slightly lower weight vs final
   grad_clip: 1.0
 
 evaluation:

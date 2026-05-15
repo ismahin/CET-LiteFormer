@@ -1,7 +1,0 @@
-{
-  "FREENET": 0,
-  "I2P": 1,
-  "TOR": 2,
-  "VPN": 3,
-  "ZERONET": 4
-}

@@ -1,9 +1,0 @@
-{
-  "experiment": "BCCC-Darknet-2025_Binary_CETLiteFormer",
-  "best_epoch": 87,
-  "best_val_macro_f1": 0.9083771899004767,
-  "best_model_path": "outputs\\BCCC-Darknet-2025_Binary_CETLiteFormer\\best_model.pt",
-  "last_model_path": "outputs\\BCCC-Darknet-2025_Binary_CETLiteFormer\\last_model.pt",
-  "num_features": 256,
-  "num_classes": 2
-}

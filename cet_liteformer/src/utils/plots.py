@@ -141,6 +141,75 @@ def plot_ablation_accuracy_latency(ablation_csv: str | Path, out_path: str | Pat
     _savefig(out_path)
 
 
+def plot_ablation_incremental_ladder(
+    ablation_csv: str | Path,
+    out_path: str | Path,
+    value_col: str = "macro_f1",
+    title: str = "Ablation ladder (test set)",
+) -> None:
+    """
+    Bar + line plot for ordered ablation steps (e.g. 01_..., 02_..., or T1_..., T2_...).
+    """
+    import pandas as pd
+
+    df = pd.read_csv(ablation_csv)
+    if df.empty or value_col not in df.columns:
+        return
+
+    df = df.sort_values("variant").reset_index(drop=True)
+    labels = df["variant"].tolist()
+    y = df[value_col].astype(float).to_numpy()
+
+    x = np.arange(len(labels))
+    fig, ax1 = plt.subplots(figsize=(max(8, len(labels) * 1.1), 5))
+    ax1.bar(x, y, color="#4C72B0", alpha=0.85, label=value_col)
+    ax1.plot(x, y, color="#DD8452", marker="o", linewidth=2, markersize=6, label="trend")
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(labels, rotation=35, ha="right", fontsize=9)
+    ax1.set_ylabel(value_col.replace("_", " ").title())
+    ax1.set_title(title)
+    ax1.grid(True, axis="y", alpha=0.3)
+    ax1.legend(loc="lower right")
+    _savefig(out_path)
+
+
+def plot_ablation_multi_metric(
+    ablation_csv: str | Path,
+    out_path: str | Path,
+    metric_cols: Optional[List[str]] = None,
+    title: str = "Ablation: test metrics",
+) -> None:
+    """Grouped bars for several metrics (each normalized to [0,1] column-wise for shape only)."""
+    import pandas as pd
+
+    if metric_cols is None:
+        metric_cols = ["accuracy", "macro_f1", "weighted_f1", "mcc"]
+
+    df = pd.read_csv(ablation_csv)
+    if df.empty:
+        return
+    df = df.sort_values("variant").reset_index(drop=True)
+    labels = df["variant"].tolist()
+    present = [c for c in metric_cols if c in df.columns]
+    if not present:
+        return
+
+    x = np.arange(len(labels))
+    width = 0.8 / max(len(present), 1)
+    fig, ax = plt.subplots(figsize=(max(9, len(labels) * 1.15), 5))
+    for i, col in enumerate(present):
+        offset = (i - (len(present) - 1) / 2) * width
+        ax.bar(x + offset, df[col].astype(float), width, label=col)
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, rotation=35, ha="right", fontsize=8)
+    ax.set_ylabel("score")
+    ax.set_title(title)
+    ax.legend(loc="lower right", fontsize=8)
+    ax.grid(True, axis="y", alpha=0.3)
+    _savefig(out_path)
+
+
 def plot_feature_correlations(
     corr_df,
     out_path: str | Path,

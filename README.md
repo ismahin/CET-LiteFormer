@@ -25,14 +25,16 @@ pip install -r requirements.txt
 
 ## Quickstart (commands)
 
-### Train
+This repository keeps **three** public benchmark setups (see below). Artifacts for those runs live under `cet_liteformer/outputs/<experiment_name>/`.
+
+### Train (example: CIC-Darknet2020, first label column)
 ```powershell
 cd D:\Projects\CET-LiteFormer\cet_liteformer
 .\.venv\Scripts\python.exe -m src.train `
   --config configs/default.yaml `
   --csv_path "..\Datasets\CIC-Darknet2020\Darknet.CSV" `
   --label_col "Label" `
-  --experiment_name "CIC-Darknet2020_CETLiteFormer" `
+  --experiment_name "CIC-Darknet2020_CETLiteFormer-tor-vpn" `
   --device cuda
 ```
 
@@ -40,7 +42,7 @@ cd D:\Projects\CET-LiteFormer\cet_liteformer
 ```powershell
 cd D:\Projects\CET-LiteFormer\cet_liteformer
 .\.venv\Scripts\python.exe -m src.evaluate `
-  --experiment_dir "outputs\CIC-Darknet2020_CETLiteFormer" `
+  --experiment_dir "outputs\CIC-Darknet2020_CETLiteFormer-tor-vpn" `
   --checkpoint "best_model.pt" `
   --device cuda
 ```
@@ -49,50 +51,26 @@ cd D:\Projects\CET-LiteFormer\cet_liteformer
 ```powershell
 cd D:\Projects\CET-LiteFormer\cet_liteformer
 .\.venv\Scripts\python.exe -m src.benchmark_latency `
-  --experiment_dir "outputs\CIC-Darknet2020_CETLiteFormer" `
+  --experiment_dir "outputs\CIC-Darknet2020_CETLiteFormer-tor-vpn" `
   --device cuda
 ```
 
-## Dataset-specific commands (examples)
+## Dataset-specific commands (three benchmarks)
 
-### CIC-Darknet2020 (use the “last” label)
-Some CIC files include **two label columns** (pandas exposes them as `Label` and `Label.1`). After cleaning, the second one becomes `Label__dup1`.
+### CIC-Darknet2020 (first `Label` column)
+Some CIC files include **two label columns** (pandas may show `Label` and `Label.1`). This setup uses the first: **`Label`**. The checked-in run folder is `outputs\CIC-Darknet2020_CETLiteFormer-tor-vpn\`.
 
 ```powershell
 cd D:\Projects\CET-LiteFormer\cet_liteformer
 .\.venv\Scripts\python.exe -m src.train `
   --config configs/default.yaml `
   --csv_path "..\Datasets\CIC-Darknet2020\Darknet.CSV" `
-  --label_col "Label__dup1" `
-  --experiment_name "CIC-Darknet2020_CETLiteFormer_LastLabel" `
+  --label_col "Label" `
+  --experiment_name "CIC-Darknet2020_CETLiteFormer-tor-vpn" `
   --device cuda
 ```
 
-### BCCC-Darknet-2025 (Binary)
-This dataset uses a lowercase label column: **`label`**.
-
-```powershell
-cd D:\Projects\CET-LiteFormer\cet_liteformer
-.\.venv\Scripts\python.exe -m src.train `
-  --config configs/default.yaml `
-  --csv_path "..\Datasets\BCCC-Darknet-2025\Binary -2DSCombined.csv" `
-  --label_col "label" `
-  --experiment_name "BCCC-Darknet-2025_Binary_CETLiteFormer" `
-  --device cuda
-```
-
-### BCCC-Darknet-2025 (Multi-class)
-```powershell
-cd D:\Projects\CET-LiteFormer\cet_liteformer
-.\.venv\Scripts\python.exe -m src.train `
-  --config configs/default.yaml `
-  --csv_path "..\Datasets\BCCC-Darknet-2025\MultiTotalDS.csv" `
-  --label_col "label" `
-  --experiment_name "BCCC-Darknet-2025_Multi_CETLiteFormer" `
-  --device cuda
-```
-
-### ISCX-Tor-NonTor-2017 (Scenario A / B)
+### ISCX-Tor-NonTor-2017 (Scenario A)
 ```powershell
 cd D:\Projects\CET-LiteFormer\cet_liteformer
 .\.venv\Scripts\python.exe -m src.train `
@@ -103,15 +81,18 @@ cd D:\Projects\CET-LiteFormer\cet_liteformer
   --device cuda
 ```
 
+### ISCXVPN2016 (Scenario A1, 15s VPN ARFF)
 ```powershell
 cd D:\Projects\CET-LiteFormer\cet_liteformer
 .\.venv\Scripts\python.exe -m src.train `
   --config configs/default.yaml `
-  --csv_path "..\Datasets\ISCX-Tor-NonTor-2017\Scenario-B-merged_5s.csv" `
+  --csv_path "..\Datasets\ISCXVPN2016  VPN-nonVPN\Scenario A1-ARFF\TimeBasedFeatures-Dataset-15s-VPN.arff" `
   --label_col "label" `
-  --experiment_name "iscx_tor_scenario_b_cet_liteformer" `
+  --experiment_name "iscxvpn2016_a1_15s_vpn_cet_liteformer" `
   --device cuda
 ```
+
+For evaluate and `benchmark_latency`, point `--experiment_dir` at `outputs\iscx_tor_scenario_a_cet_liteformer` or `outputs\iscxvpn2016_a1_15s_vpn_cet_liteformer` respectively. Bash equivalents are under `cet_liteformer/scripts/`.
 
 ## Configuration
 The main config is `configs/default.yaml`. Useful knobs:
@@ -130,7 +111,7 @@ Each run writes to `outputs/<experiment_name>/` (names may vary slightly by conf
 
 ## Troubleshooting
 - **PowerShell**: use `;` instead of `&&` when chaining commands.
-- **Label column not found**: print/inspect headers and pass the exact name via `--label_col` (common: `label`, `Label`, `Label__dup1`).
+- **Label column not found**: print/inspect headers and pass the exact name via `--label_col` (common: `label`, `Label`; a duplicate second column may appear as `Label__dup1`).
 - **CUDA not used**: ensure your PyTorch build is CUDA-enabled and run with `--device cuda`.
 
 ## License
